@@ -681,6 +681,24 @@ app.get("/products/data1", async (req, res) => {
 //   }
 // });
 
+
+// next endpoint
+  app.get("/products/filter81", async (req, res) => {
+  try {
+    const { brand, rating } = req.query;
+
+    const result = await ProductModel.find({
+      brand: brand,
+      rating: { $gte: Number(rating) },
+    });
+
+    res.status(200).json({ result });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 // //9th endpoint
 
 // app.get("/products/filter9", async (req, res) => {
